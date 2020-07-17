@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 const labelStyle = {
   color: "blue"
 }
+const spacing = '1em'
 const styles = {
   button: {
-    marginTop: "1em",
-    padding: "1em"
+    marginTop: spacing,
+    padding: spacing
+  },
+  input: {
+    padding: spacing
   }
 }
 function App() {
   const [url, setUrl] = useState('')
   const handleSubmit = async () => {
     try {
-      await fetch('/.netlify/functions/screengrab', {
+      await fetch('/.netlify/functions/screenGrab', {
         method: 'POST',
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
