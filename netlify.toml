@@ -1,5 +1,5 @@
 [build]
     base = "."
-    build = "build/"
-    functions = "functions/"
-    commands = "cd functions && npm i && cd .."
+    publish = "build/"
+    functions ="functions/"
+    command = "cd functions && npm i && cd .."
