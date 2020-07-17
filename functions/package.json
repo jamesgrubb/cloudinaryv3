@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "playwright-aws-lambda": "^0.5.2",
-    "playwright-core": "^1.2.1"
+    "playwright-aws-lambda": "^0.4.0",
+    "playwright-core": "^0.11.1"
   }
 }

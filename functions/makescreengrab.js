@@ -6,10 +6,10 @@ exports.handler = async (event, context) => {
 
     try {
         const browser = await playwright.launchChromium();
-        const context = await browser.newContext();
+        const context = await browser.defaultContext();
 
         const page = await context.newPage();
-        await page.goto(event.url || 'https://example.com');
+        await page.goto('https://google.com');
 
         console.log('Page title: ', await page.title());
     } catch (error) {
