@@ -2,4 +2,4 @@
     base = "."
     publish = "build/"
     functions ="functions/"
-    command = "cd functions && npm i && cd .."
+    command = "npm run build && cd functions && npm i && cd .."
