@@ -15,7 +15,7 @@ function App() {
       await fetch('/.netlify/functions/screengrab', {
         method: 'POST',
         body: JSON.stringify({ data: url }),
-        headers: 'Content-type : application/json'
+        headers: { 'Content-type': 'application/json' }
       }).then(res => res.json())
     }
     catch (error) {
@@ -32,7 +32,7 @@ function App() {
           <article><h2>Take a screen grab usng a <em>url</em></h2>
             <fieldset style={{ padding: "0.8em", width: "30vw" }}>
               <legend>Make a screen grab</legend>
-              <form action="POST" type="submit" style={{ display: "grid" }}>
+              <form onSubmit={handleSubmit} type="submit" style={{ display: "grid" }}>
                 <label style={labelStyle} htmlFor="link">Link to page</label>
                 <input type="text" onChange={(event) => setUrl(event.target.value)} />
                 <button style={styles.button} type="submit">submit</button>
