@@ -9,21 +9,23 @@ const styles = {
     padding: spacing
   },
   input: {
-    padding: spacing
+    padding: spacing,
+    marginTop: "0.6em"
   }
 }
 function App() {
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState()
   const handleSubmit = async () => {
     try {
+      if (!url) return
       await fetch('/.netlify/functions/screenGrab', {
         method: 'POST',
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
-      }).then(res => res.json())
+      })
     }
     catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
   return (
@@ -38,7 +40,7 @@ function App() {
               <legend>Make a screen grab</legend>
               <form onSubmit={handleSubmit} type="submit" style={{ display: "grid" }}>
                 <label style={labelStyle} htmlFor="link">Link to page</label>
-                <input type="text" onChange={(event) => setUrl(event.target.value)} />
+                <input style={styles.input} type="text" onChange={(event) => setUrl(event.target.value)} />
                 <button style={styles.button} type="submit">submit</button>
               </form>
             </fieldset>

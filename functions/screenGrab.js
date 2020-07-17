@@ -6,6 +6,8 @@ exports.handler = async (event, ctx) => {
 
     try {
         const url = JSON.parse(event.body).data
+        console.log("exports.handler -> url", url)
+
         const browser = await playwright.launchChromium();
         const context = await browser._defaultContext;
         const page = await context.newPage();
