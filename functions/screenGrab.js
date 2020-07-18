@@ -15,6 +15,7 @@ exports.handler = async (event, ctx) => {
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
         const buffer = await page.screenshot()
         const imageBuffer = await buffer.toString('base64')
+        console.log("exports.handler -> imageBuffer", imageBuffer)
         const uploadedResponse = await cloudinary.uploader.upload(imageBuffer, {
             upload_preset: 'dev_upload'
         })
