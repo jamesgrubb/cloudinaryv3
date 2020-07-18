@@ -15,7 +15,7 @@ exports.handler = async (event, ctx) => {
         //     viewport: iPhone.viewport,
         //     useAgent: iPhone.userAgent
         // });
-        const context = await browser.newContext()
+        const context = await browser._defaultContext
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
         // await page.emulate(devices['iPhone 6'])
