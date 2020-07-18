@@ -18,11 +18,11 @@ exports.handler = async (event, ctx) => {
             upload_preset: 'dev_upload'
         })
         console.log("exports.handler -> uploadedResponse", uploadedResponse)
-        ctx.json({ message: 'yay' })
+
         console.log('Page title: ', await page.screenshot({ encoding: "base64" }));
         // console.log('Page title: ', await page.title());
     } catch (error) {
-        ctx.status(500).json({ err: 'uh oh' })
+
         throw error
 
     } finally {
