@@ -13,10 +13,10 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext;
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
-        const buffer = await page.screenshot()
+        const buffer = await page.screenshot({ type: "jpeg" })
         const imageBuffer = await buffer.toString('base64')
         console.log("exports.handler -> imageBuffer", imageBuffer)
-        const uploadedResponse = await cloudinary.uploader.upload(imageBuffer, {
+        const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload'
         })
         console.log("screenshotPage -> uploadedResponse", uploadedResponse)
