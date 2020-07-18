@@ -12,6 +12,7 @@
   "dependencies": {
     "cloudinary": "^1.22.0",
     "playwright-aws-lambda": "^0.4.0",
+    "playwright-chromium": "^1.2.1",
     "playwright-core": "^0.11.1"
   }
 }
