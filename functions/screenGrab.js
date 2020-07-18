@@ -12,8 +12,9 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext;
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
-        const iPhone = await page.screenshot
+        const iPhone = await page.screenshot({ isBase64encoded: true })
         console.log("exports.handler -> iPhone", iPhone)
+
     } catch (error) {
         throw error;
     } finally {
