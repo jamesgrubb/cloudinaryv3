@@ -1,6 +1,6 @@
 const playwright = require('playwright-aws-lambda');
 const { cloudinary } = require('./utils/cloudinary')
-
+const { devices } = require('playwright-chromium')
 exports.handler = async (event, ctx) => {
     let result = null;
     let browser = null;
@@ -13,6 +13,7 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext;
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
+        await page.emulateMedia(devices['iPhone 6'])
         const buffer = await page.screenshot({ type: "jpeg" })
         const imageBuffer = await buffer.toString('base64')
         console.log("exports.handler -> imageBuffer", imageBuffer)
