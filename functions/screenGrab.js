@@ -11,10 +11,11 @@ exports.handler = async (event, ctx) => {
         console.log("exports.handler -> url", url)
 
         const browser = await playwright.launchChromium();
-        const context = await browser.newContext({
-            viewport: iPhone.viewport,
-            useAgent: iPhone.userAgent
-        });
+        // const context = await browser.newContext({
+        //     viewport: iPhone.viewport,
+        //     useAgent: iPhone.userAgent
+        // });
+        const context = await browser.newContext()
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
         // await page.emulate(devices['iPhone 6'])
