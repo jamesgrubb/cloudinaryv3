@@ -5,7 +5,7 @@ const { devices } = require('playwright-chromium')
 exports.handler = async (event, ctx) => {
     let result = null;
     let browser = null;
-    console.log("devices", devices)
+
     try {
         const url = JSON.parse(event.body).data
         console.log("exports.handler -> url", url)
@@ -13,7 +13,7 @@ exports.handler = async (event, ctx) => {
         const browser = await playwright.launchChromium();
         const context = await browser._defaultContext;
         const page = await context.newPage();
-        await page.emulate('iPhone 7 Plus');
+        await page.emulate(devices['iPhone 7 Plus']);
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
         const buffer = await page.screenshot({ type: "jpeg" })
         const imageBuffer = await buffer.toString('base64')
