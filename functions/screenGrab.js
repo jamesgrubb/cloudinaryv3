@@ -1,4 +1,5 @@
 const playwright = require('playwright-aws-lambda');
+const { cloudinary } = require('./utils/cloudinary')
 
 exports.handler = async (event, ctx) => {
     let result = null;
@@ -12,11 +13,18 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext;
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
-
+        const grab = await page.screenshot({ encoding: "base64" })
+        const uploadedResponse = await cloudinary.uploader.upload(grab, {
+            upload_preset: 'dev_upload'
+        })
+        console.log("exports.handler -> uploadedResponse", uploadedResponse)
+        ctx.json({ message: 'yay' })
         console.log('Page title: ', await page.screenshot({ encoding: "base64" }));
         // console.log('Page title: ', await page.title());
     } catch (error) {
-        throw error;
+        ctx.status(500).json({ err: 'uh oh' })
+        throw error
+
     } finally {
         if (browser !== null) {
             await browser.close();
