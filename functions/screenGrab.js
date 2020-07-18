@@ -13,12 +13,23 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext;
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
-        const grab = await page.screenshot({ encoding: "base64" })
-        const uploadedResponse = await cloudinary.uploader.upload(grab, {
-            upload_preset: 'dev_upload'
-        })
-        console.log("exports.handler -> uploadedResponse", uploadedResponse)
+        await screenshotPage(page)
+        // const grab = await page.screenshot({ encoding: "base64" })
 
+        // console.log("exports.handler -> uploadedResponse", uploadedResponse)
+        function screenshotPage(page) {
+            return new Promise(resolve => {
+                let buffer = page.screenshot()
+                let imageBuffer = buffer.toString('base64')
+                let uploadedResponse = cloudinary.uploader.upload(imageBuffer, {
+                    upload_preset: 'dev_upload'
+                })
+                setTimeout(() => {
+                    resolve(uploadedResponse)
+                }, 2000)
+
+            })
+        }
         console.log('Page title: ', await page.screenshot({ encoding: "base64" }));
         // console.log('Page title: ', await page.title());
     } catch (error) {
