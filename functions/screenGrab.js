@@ -19,7 +19,7 @@ exports.handler = async (event, ctx) => {
         const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload'
         })
-        console.log("screenshotPage -> uploadedResponse", uploadedResponse)
+        // console.log("screenshotPage -> uploadedResponse", uploadedResponse)
 
 
 
