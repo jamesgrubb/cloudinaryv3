@@ -13,7 +13,8 @@ exports.handler = async (event, ctx) => {
         const page = await context.newPage();
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
 
-        console.log('Page title: ', await page.title());
+        console.log('Page title: ', await page.screenshot({ isBase64Encoded: true }));
+        // console.log('Page title: ', await page.title());
     } catch (error) {
         throw error;
     } finally {
