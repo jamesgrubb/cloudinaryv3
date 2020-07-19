@@ -23,6 +23,7 @@ function App() {
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
       })
+
     }
     catch (error) {
       console.error(error)
