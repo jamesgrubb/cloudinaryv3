@@ -2,18 +2,7 @@ const playwright = require('playwright-aws-lambda');
 const { cloudinary } = require('./utils/cloudinary')
 const { devices } = require('playwright-chromium')
 
-devices['desktop'] = {
-    'viewport': {
-        'width': 1140,
-        'height': 900
-    }
-}
-
 const iPhone = devices['iPhone 11 Pro']
-const iPad = devices['iPad (gen 6)']
-const desktop = devices['desktop']
-
-
 exports.handler = async (event, ctx, callback) => {
     let result = null;
     let browser = null;
@@ -42,7 +31,8 @@ exports.handler = async (event, ctx, callback) => {
         await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload',
             public_id: "iPhone",
-            tags: ["iphone"]
+            tags: ["iphone"],
+
             // { height: 838, width: 388, crop: "scale" },
             // // { if: "!iphone!_in_tags", transformation: "phone" }
             // { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
