@@ -33,16 +33,14 @@ exports.handler = async (event, ctx, callback) => {
             public_id: "iPhone",
             tags: ["iphone"],
             eager: [
-                {
-                    transformation: [
-                        { effect: "outline:inner_fill:200:20", height: 838, width: 388, y: 0, crop: "fill" },
-                        { effect: "outline:inner:1:300", height: 892, overlay: "packshot:device:phone", width: 448, y: 1, crop: "fill" }
-                    ]
-                }
-                // { height: 838, width: 388, crop: "scale" },
-                // // { if: "!iphone!_in_tags", transformation: "phone" }
-                // { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
+                { effect: "outline:inner_fill:200:20", height: 838, width: 388, y: 0, crop: "fill" },
+                { effect: "outline:inner:1:300", height: 892, overlay: "packshot:device:phone", width: 448, y: 1, crop: "fill" }
             ]
+
+            // { height: 838, width: 388, crop: "scale" },
+            // // { if: "!iphone!_in_tags", transformation: "phone" }
+            // { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
+
         })
 
 
