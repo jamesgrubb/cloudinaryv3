@@ -29,7 +29,12 @@ exports.handler = async (event, ctx, callback) => {
         // const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
         //     upload_preset: 'dev_upload'
         await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
-            upload_preset: 'dev_upload'
+            upload_preset: 'dev_upload',
+            public_id: iPhone,
+            tags: [iPhone],
+            eager: [
+                { width: 388, height: 838, crop: "fill" }
+            ]
         })
 
 
