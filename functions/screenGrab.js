@@ -33,9 +33,10 @@ exports.handler = async (event, ctx, callback) => {
             public_id: "iPhone",
             tags: ["iphone"],
             eager: [
-                { height: 838, width: 388, crop: "scale" },
-                // { if: "!iphone!_in_tags", transformation: "phone" }
-                { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
+                { transformation: "phone" }
+                // { height: 838, width: 388, crop: "scale" },
+                // // { if: "!iphone!_in_tags", transformation: "phone" }
+                // { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
             ]
         })
 
