@@ -35,7 +35,7 @@ exports.handler = async (event, ctx, callback) => {
         ).sort_by('public_id', 'desc')
             .max_results(30)
             .execute()
-        const publicIds = resources.map(file => file.public_id)
+        const publicIds = await resources.map(file => file.public_id)
         callback(null, {
             statusCode: 200,
             body: JSON.stringify(publicIds)

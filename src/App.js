@@ -49,7 +49,7 @@ function App() {
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
 
-      }).then(res => res.json()).then(files => setFiles(files))
+      }).then(res => res.json()).then(log => console.log(log)).then(files => setFiles(files))
 
 
     }
@@ -57,6 +57,9 @@ function App() {
       console.error(error)
     }
   }
+
+
+
   return (
     <div className="App">
       <header>
