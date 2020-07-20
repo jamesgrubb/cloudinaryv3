@@ -38,7 +38,7 @@ exports.handler = async (event, ctx, callback) => {
         const publicIds = resources.map(file => file.public_id)
         console.log("exports.handler -> publicIds", publicIds)
 
-        callback(null, {
+        await callback(null, {
             statusCode: 200,
             body: JSON.stringify(publicIds)
         })
