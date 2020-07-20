@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const labelStyle = {
   color: "blue"
 }
@@ -26,20 +26,20 @@ function App() {
   const [url, setUrl] = useState()
   const [files, setFiles] = useState()
 
-  // const getFiles = async () => {
-  //   try {
-  //     await fetch('/.netlify/functions/fetchScreenGrabs')
-  //       .then(res => res.json())
-  //       .then(files => setFiles(files))
-  //   }
-  //   catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  const getFiles = async () => {
+    try {
+      await fetch('/.netlify/functions/fetchScreenGrabs')
+        .then(res => res.json())
+        .then(files => setFiles(files))
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
 
-  // useEffect(() => {
-  //   getFiles()
-  // }, [])
+  useEffect(() => {
+    getFiles()
+  }, [])
 
   const handleSubmit = async () => {
     try {

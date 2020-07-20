@@ -26,24 +26,14 @@ exports.handler = async (event, ctx, callback) => {
 
 
 
-        const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
+        // const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
+        //     upload_preset: 'dev_upload'
+        await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload'
         })
 
-        const { resources } = await cloudinary.search.expression(
-            'folder:packshot'
-        ).sort_by('public_id', 'desc')
-            .max_results(30)
-            .execute()
-        const publicIds = resources.map(file => file.public_id)
-        console.log("exports.handler -> publicIds", publicIds)
 
-        await callback(null, {
-            statusCode: 200,
-            body: JSON.stringify(publicIds)
 
-        })
-        cloudinary.disconnect()
 
     } catch (error) {
 
