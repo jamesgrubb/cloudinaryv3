@@ -23,14 +23,15 @@ exports.handler = async (event, ctx) => {
         // await page.emulate(devices['iPhone 6'])
         const buffer = await page.screenshot({ type: "jpeg" })
         const imageBuffer = await buffer.toString('base64')
-        console.log(page.viewport)
+
+
         console.log("exports.handler -> imageBuffer", imageBuffer)
         const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload'
         })
         // console.log("screenshotPage -> uploadedResponse", uploadedResponse)
 
-
+        console.log("exports.handler -> viewport", page.viewport)
 
         // const grab = await page.screenshot({ encoding: "base64" })
 
