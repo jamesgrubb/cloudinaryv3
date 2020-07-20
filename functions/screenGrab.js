@@ -13,7 +13,6 @@ const iPhone = devices['iPhone 11 Pro']
 const iPad = devices['iPad (gen 6)']
 const desktop = devices['desktop']
 
-const allDevices = [iPhone, iPad, desktop]
 
 exports.handler = async (event, ctx, callback) => {
     let result = null;
@@ -29,25 +28,22 @@ exports.handler = async (event, ctx, callback) => {
         //     useAgent: iPhone.userAgent
         // });
         const context = await browser._defaultContext
-        allDevices.forEach(async (device, index) => {
-
-            const page = await context.newPage();
-            await page.setViewportSize(device.viewport)
-            await page.goto(url || 'https://www.jamesgrubb.co.uk');
-            // await page.emulate(devices['iPhone 6'])
-            const buffer = await page.screenshot({ type: "jpeg" })
-            const imageBuffer = await buffer.toString('base64')
+        const page = await context.newPage();
+        await page.setViewportSize(iPhone.viewport)
+        await page.goto(url || 'https://www.jamesgrubb.co.uk');
+        // await page.emulate(devices['iPhone 6'])
+        const buffer = await page.screenshot({ type: "jpeg" })
+        const imageBuffer = await buffer.toString('base64')
 
 
 
-            // const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
-            //     upload_preset: 'dev_upload'
-            await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
-                upload_preset: 'dev_upload',
-                public_id: device[index],
-                tags: [device[index]]
-                // { height: 838, width: 388, crop: "scale" },
-            })
+        // const uploadedResponse = await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
+        //     upload_preset: 'dev_upload'
+        await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
+            upload_preset: 'dev_upload',
+            public_id: "iPhone",
+            tags: ["iphone"]
+            // { height: 838, width: 388, crop: "scale" },
             // // { if: "!iphone!_in_tags", transformation: "phone" }
             // { height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
 
