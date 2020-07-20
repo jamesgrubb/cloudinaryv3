@@ -30,13 +30,14 @@ exports.handler = async (event, ctx, callback) => {
         //     upload_preset: 'dev_upload'
         await cloudinary.uploader.upload(`data:image/jpg;base64,${imageBuffer}`, {
             upload_preset: 'dev_upload',
-            public_id: iPhone,
-            tags: [iPhone],
+            public_id: "iPhone",
+            tags: ["iphone"],
             eager: [
-                { width: 388, height: 838, crop: "fill" }
+                { height: 838, width: 388, crop: "scale" },
+                { if: "!iphone!_in_tags", transformation: "phone" }
+                // { if: "!iphone!_in_tags", height: 892, overlay: "packshot:device:phone", width: 448, crop: "scale" }
             ]
         })
-
 
 
 
