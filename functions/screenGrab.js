@@ -29,7 +29,7 @@ exports.handler = async (event, ctx, callback) => {
         //     useAgent: iPhone.userAgent
         // });
         const context = await browser._defaultContext
-        allDevices.forEach((device, index) => {
+        allDevices.forEach(async (device, index) => {
 
             const page = await context.newPage();
             await page.setViewportSize(device.viewport)
