@@ -1,8 +1,9 @@
 
 const { cloudinary } = require('./utils/cloudinary')
-const fetch = require('node-fetch')
 
-exports.handler = async (event, context) => {
+
+exports.handler = async (event, context, callback) => {
+
 
     const { resources } = await cloudinary.search.expression(
         'folder:packshot'
@@ -10,6 +11,8 @@ exports.handler = async (event, context) => {
         .max_results(30)
         .execute()
     const publicIds = resources.map(file => file.public_id)
-
-    const results = await fetch('')
+    callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(publicIds)
+    })
 }

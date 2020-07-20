@@ -1,11 +1,12 @@
 const playwright = require('playwright-aws-lambda');
 const { cloudinary } = require('./utils/cloudinary')
 const { devices } = require('playwright-chromium')
+console.log("devices", devices)
 const iPhone = devices['iPhone 11 Pro']
 exports.handler = async (event, ctx) => {
     let result = null;
     let browser = null;
-    console.log('function running from device repository')
+
     try {
         const url = JSON.parse(event.body).data
         console.log("exports.handler -> url", url)
@@ -18,6 +19,7 @@ exports.handler = async (event, ctx) => {
         const context = await browser._defaultContext
         const page = await context.newPage();
         await page.setViewportSize(iPhone.viewport)
+        await page.emulateMedia(iPhone.userAgent)
         await page.goto(url || 'https://www.jamesgrubb.co.uk');
         // await page.emulate(devices['iPhone 6'])
         const buffer = await page.screenshot({ type: "jpeg" })

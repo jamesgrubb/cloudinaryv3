@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const labelStyle = {
   color: "blue"
 }
@@ -13,8 +13,34 @@ const styles = {
     marginTop: "0.6em"
   }
 }
+
+const FileList = ({ files }) => {
+  return (
+    <ul>
+      {files && files.map(file => <li key={file}>{file}</li>)}
+    </ul>
+  )
+}
+
 function App() {
   const [url, setUrl] = useState()
+  const [files, setFiles] = useState()
+
+  const getFiles = async () => {
+    try {
+      await fetch('/.netlify/functions/fetchScreenGrabs')
+        .then(res => res.json())
+        .then(files => setFiles(files))
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getFiles()
+  }, [])
+
   const handleSubmit = async () => {
     try {
       if (!url) return
@@ -23,7 +49,6 @@ function App() {
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
       })
-
     }
     catch (error) {
       console.error(error)
@@ -46,6 +71,9 @@ function App() {
               </form>
             </fieldset>
           </article>
+        </section>
+        <section>
+          <FileList files={files} />
         </section>
       </main>
     </div>
