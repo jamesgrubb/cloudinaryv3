@@ -49,11 +49,7 @@ function App() {
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
 
-      }).then(async function () {
-        await fetch('/.netlify/functions/fetchScreenGrabs')
-          .then(res => res.json())
-          .then(files => setFiles(files))
-      })
+      }).then(res => res.json()).then(files => setFiles(files))
 
 
     }

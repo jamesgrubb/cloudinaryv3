@@ -3,7 +3,7 @@ const { cloudinary } = require('./utils/cloudinary')
 const { devices } = require('playwright-chromium')
 console.log("devices", devices)
 const iPhone = devices['iPhone 11 Pro']
-exports.handler = async (event, ctx) => {
+exports.handler = async (event, ctx, callback) => {
     let result = null;
     let browser = null;
 
@@ -30,7 +30,16 @@ exports.handler = async (event, ctx) => {
             upload_preset: 'dev_upload'
         })
         // console.log("screenshotPage -> uploadedResponse", uploadedResponse)
-
+        const { resources } = await cloudinary.search.expression(
+            'folder:packshot'
+        ).sort_by('public_id', 'desc')
+            .max_results(30)
+            .execute()
+        const publicIds = resources.map(file => file.public_id)
+        callback(null, {
+            statusCode: 200,
+            body: JSON.stringify(publicIds)
+        })
         console.log("exports.handler -> viewport", page.viewport)
 
         // const grab = await page.screenshot({ encoding: "base64" })
