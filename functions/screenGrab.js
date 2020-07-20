@@ -41,7 +41,9 @@ exports.handler = async (event, ctx, callback) => {
         await callback(null, {
             statusCode: 200,
             body: JSON.stringify(publicIds)
+
         })
+        cloudinary.disconnect()
 
     } catch (error) {
 
