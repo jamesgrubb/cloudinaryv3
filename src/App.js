@@ -26,20 +26,20 @@ function App() {
   const [url, setUrl] = useState()
   const [files, setFiles] = useState()
 
-  const getFiles = async () => {
-    try {
-      await fetch('/.netlify/functions/fetchScreenGrabs')
-        .then(res => res.json())
-        .then(files => setFiles(files))
-    }
-    catch (error) {
-      console.error(error)
-    }
-  }
+  // const getFiles = async () => {
+  //   try {
+  //     await fetch('/.netlify/functions/fetchScreenGrabs')
+  //       .then(res => res.json())
+  //       .then(files => setFiles(files))
+  //   }
+  //   catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
-  useEffect(() => {
-    getFiles()
-  }, [])
+  // useEffect(() => {
+  //   getFiles()
+  // }, [])
 
   const handleSubmit = async () => {
     try {
@@ -49,6 +49,10 @@ function App() {
         body: JSON.stringify({ data: url }),
         headers: { 'Content-type': 'application/json' }
       })
+      await fetch('/.netlify/functions/fetchScreenGrabs')
+        .then(res => res.json())
+        .then(files => setFiles(files))
+
     }
     catch (error) {
       console.error(error)
